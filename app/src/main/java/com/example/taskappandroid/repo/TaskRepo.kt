@@ -20,6 +20,7 @@ class TaskRepo @Inject constructor(private val taskDao: TaskDao){
     }
 
     fun getAllTasks() = taskDao.getAllTasks()
+    fun getAllPriorityTasks() = taskDao.getAllPriorityTasks()
 
 
 
