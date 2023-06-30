@@ -4,13 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="task"
+            type="com.example.taskappandroid.database.Task" />
+        
+        <variable
+            name="clickListner"
+            type="com.example.taskappandroid.ui.task.TaskClickListener" />
 
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp">
+        android:layout_margin="3dp"
+        android:onClick="@{() -> clickListner.onClick(task) }">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/row_background"
@@ -27,7 +35,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Titre" />
+                tools:text="Titre"
+                android:text="@{task.title}"/>
 
             <TextView
                 android:id="@+id/TaskPriority"
@@ -39,7 +48,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TitleTask"
-                tools:text="Priorité" />
+                tools:text="Priorité"
+                app:setPriority="@{task.priority}"/>
 
             <TextView
                 android:id="@+id/TimestampTask"
@@ -54,7 +64,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TaskPriority"
                 app:layout_constraintVertical_bias="0.0"
-                tools:text="Time" />
+                tools:text="Time"
+                app:setTimestamp="@{task.timestamp}"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_task" >
         <action
             android:id="@+id/action_taskFragment_to_addTaskFragment"
-            app:destination="@id/addTaskFragment" />
+            app:destination="@id/addTaskFragment"
+            app:enterAnim="@anim/right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
@@ -21,6 +25,9 @@
         tools:layout="@layout/fragment_add_task" >
         <action
             android:id="@+id/action_addTaskFragment_to_taskFragment"
-            app:destination="@id/taskFragment" />
+            app:destination="@id/taskFragment"
+            app:enterAnim="@anim/left"
+            app:exitAnim="@anim/to_right"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

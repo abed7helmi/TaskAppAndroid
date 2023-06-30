@@ -5,13 +5,11 @@ import com.example.taskappandroid.database.Task
 import com.example.taskappandroid.database.TaskDao
 import javax.inject.Inject
 
-class TaskRepo @Inject constructor(private val taskDao: TaskDao){
+class TaskRepo ( val taskDao: TaskDao){
 
     suspend fun insert(taskEntry: Task) = taskDao.insert(taskEntry)
 
-    fun searchDatabase(searchQuery: String): LiveData<List<Task>> {
-        return taskDao.searchDatabase(searchQuery)
-    }
+
 
     suspend fun deleteItem(taskEntry: Task) = taskDao.delete(taskEntry)
 
@@ -19,8 +17,9 @@ class TaskRepo @Inject constructor(private val taskDao: TaskDao){
         taskDao.deleteAll()
     }
 
-    fun getAllTasks() = taskDao.getAllTasks()
-    fun getAllPriorityTasks() = taskDao.getAllPriorityTasks()
+    //fun getAllTasks() = taskDao.getAllTasks()
+    fun getAllTasks() : LiveData<List<Task>> = taskDao.getAllTasks()
+    //fun getAllPriorityTasks() = taskDao.getAllPriorityTasks()
 
 
 
