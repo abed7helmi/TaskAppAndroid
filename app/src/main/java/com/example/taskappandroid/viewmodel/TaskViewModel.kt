@@ -24,7 +24,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application){
     init {
         repository = TaskRepo(taskDao)
         getAllTasks = repository.getAllTasks()
-        Log.v("wiiiw",getAllTasks.toString())
+        Log.v("test",getAllTasks.toString())
     }
 
     fun insert(task : Task){

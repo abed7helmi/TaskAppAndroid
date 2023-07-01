@@ -1,6 +1,6 @@
 package com.example.taskappandroid.utilities
 
-import android.annotation.SuppressLint
+
 import android.graphics.Color
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

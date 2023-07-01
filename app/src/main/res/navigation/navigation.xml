@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/taskFragment"
         android:name="com.example.taskappandroid.ui.task.TaskFragment"
-        android:label="fragment_task"
+        android:label="Task App Android"
         tools:layout="@layout/fragment_task" >
         <action
             android:id="@+id/action_taskFragment_to_addTaskFragment"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/addTaskFragment"
         android:name="com.example.taskappandroid.ui.add.AddTaskFragment"
-        android:label="fragment_add_task"
+        android:label="Add"
         tools:layout="@layout/fragment_add_task" >
         <action
             android:id="@+id/action_addTaskFragment_to_taskFragment"
