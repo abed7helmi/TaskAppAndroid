@@ -3,6 +3,7 @@ package com.example.taskappandroid.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 
 import androidx.lifecycle.viewModelScope
 
@@ -21,10 +22,13 @@ class TaskViewModel(application: Application) : AndroidViewModel(application){
     private val taskDao = TaskDatabase.getDatabase(application).taskDao()
     private val repository : TaskRepo
     val getAllTasks: Flow<List<Task>>
+    val getAllPriorityTasks : LiveData<List<Task>>
     init {
         repository = TaskRepo(taskDao)
         getAllTasks = repository.getAllTasks()
         Log.v("test",getAllTasks.toString())
+
+        getAllPriorityTasks= repository.getAllPriorityTasks()
     }
 
     fun insert(task : Task){
@@ -44,6 +48,8 @@ class TaskViewModel(application: Application) : AndroidViewModel(application){
             repository.deleteAll()
         }
     }
+
+
 
 
 

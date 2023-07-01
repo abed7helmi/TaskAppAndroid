@@ -18,10 +18,8 @@ class TaskRepo ( val taskDao: TaskDao){
 
     fun getAllTasks() = taskDao.getAllTasks()
 
-    fun searchDatabase(searchQuery: String): LiveData<List<Task>> {
-        return taskDao.searchDatabase(searchQuery)
-    }
 
+    fun getAllPriorityTasks() : LiveData<List<Task>> = taskDao.getAllPriorityTasks()
 
 
 

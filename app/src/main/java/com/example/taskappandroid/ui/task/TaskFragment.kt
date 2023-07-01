@@ -12,10 +12,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -27,6 +29,7 @@ import com.example.taskappandroid.viewmodel.TaskViewModel
 import com.exemple.taskappandroid.R
 import com.exemple.taskappandroid.databinding.FragmentTaskBinding
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
 import kotlinx.coroutines.launch
 
@@ -111,10 +114,13 @@ class TaskFragment : Fragment() {
 
 
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
 
-
+            R.id.action_priority -> viewModel.getAllPriorityTasks.observe(viewLifecycleOwner,Observer {
+                tasks -> adapter.submitList(tasks)
+            })
             R.id.delete_all -> deleteAllItem()
         }
         return super.onOptionsItemSelected(item)
