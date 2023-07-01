@@ -7,18 +7,19 @@
         <variable
             name="task"
             type="com.example.taskappandroid.database.Task" />
-        
+       <!--
         <variable
             name="clickListner"
-            type="com.example.taskappandroid.ui.task.TaskClickListener" />
+            type="com.example.taskappandroid.ui.task.TaskClickListener" />-->
 
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:onClick="@{() -> clickListner.onClick(task) }">
+        android:layout_margin="3dp">
+<!--        android:onClick="@{() -> clickListner.onClick(task) }"-->
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/row_background"
@@ -32,11 +33,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:text="@{task.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Titre"
-                android:text="@{task.title}"/>
+                tools:text="Titre" />
 
             <TextView
                 android:id="@+id/TaskPriority"

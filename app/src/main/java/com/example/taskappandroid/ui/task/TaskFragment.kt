@@ -1,31 +1,25 @@
 package com.example.taskappandroid.ui.task
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
+
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.SearchView
+
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
-import com.android.kotlinmvvmtodolist.R
-import com.android.kotlinmvvmtodolist.databinding.FragmentTaskBinding
+
+
 import com.example.taskappandroid.viewmodel.TaskViewModel
-import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
+import com.exemple.taskappandroid.R
+import com.exemple.taskappandroid.databinding.FragmentTaskBinding
+
 import kotlinx.coroutines.launch
 
 
@@ -33,6 +27,9 @@ import kotlinx.coroutines.launch
 
 class TaskFragment : Fragment() {
     private val viewModel : TaskViewModel by viewModels()
+    private lateinit var adapter: TaskAdapter
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +37,27 @@ class TaskFragment : Fragment() {
     ): View? {
         val binding = FragmentTaskBinding.inflate(inflater)
 
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        adapter = TaskAdapter()
+
+        /*viewModel.getAllTasks.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }*/
+
+        lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.getAllTasks.collect{ tasks ->
+                    Log.v("test",tasks.toString())
+                    adapter.submitList(tasks)
+                }
+            }
+        }
+
         binding.apply {
+            binding.recyclerView.adapter = adapter ;
+
             floatingActionButton.setOnClickListener{
                 findNavController().navigate(R.id.action_taskFragment_to_addTaskFragment)
             }

@@ -1,14 +1,16 @@
 package com.example.taskappandroid.ui.task
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.kotlinmvvmtodolist.databinding.LayoutRowBinding
 import com.example.taskappandroid.database.Task
+import com.exemple.taskappandroid.databinding.LayoutRowBinding
 
-class TaskAdapter(val clickListener: TaskClickListener): ListAdapter<Task, TaskAdapter.ViewHolder>(TaskDiffCallback) {
+
+class TaskAdapter: ListAdapter<Task, TaskAdapter.ViewHolder>(TaskDiffCallback) {
 
     companion object TaskDiffCallback : DiffUtil.ItemCallback<Task>(){
         override fun areItemsTheSame(oldItem: Task, newItem: Task) = oldItem.id == newItem.id
@@ -16,9 +18,10 @@ class TaskAdapter(val clickListener: TaskClickListener): ListAdapter<Task, TaskA
     }
 
     class ViewHolder(private val binding: LayoutRowBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(task: Task, clickListener: TaskClickListener){
+
+        fun bind(task: Task){
+            Log.v("wiw",task.toString())
             binding.task = task
-            binding.clickListner = clickListener
             binding.executePendingBindings()
         }
     }
@@ -29,12 +32,8 @@ class TaskAdapter(val clickListener: TaskClickListener): ListAdapter<Task, TaskA
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
-        if(current != null){
-            holder.bind(current, clickListener)
-        }
-    }
-}
+        Log.v("Adapter", "onBindViewHolder: $position")
+        holder.bind(current)
 
-class TaskClickListener(val clickListener: (taskEntry: Task) -> Unit){
-    fun onClick(taskEntry: Task) = clickListener(taskEntry)
+    }
 }

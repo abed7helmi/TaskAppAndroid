@@ -1,55 +1,30 @@
 package com.example.taskappandroid.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+
 import androidx.lifecycle.viewModelScope
 
 import com.example.taskappandroid.database.Task
 import com.example.taskappandroid.database.TaskDatabase
 import com.example.taskappandroid.repo.TaskRepo
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-
-/*@HiltViewModel
-class TaskViewModel @Inject constructor(
-    private val repository : TaskRepo
-) : ViewModel(){
-
-    val getAllTasks = repository.getAllTasks()
-    val getAllPriorityTasks = repository.getAllPriorityTasks()
-
-    fun insert(taskEntry: Task) = viewModelScope.launch {
-        repository.insert(taskEntry)
-    }
-
-    fun delete(taskEntry: Task) = viewModelScope.launch{
-        repository.deleteItem(taskEntry)
-    }
-
-
-    fun deleteAll() = viewModelScope.launch{
-        repository.deleteAll()
-    }
 
 
 
-    fun searchDatabase(searchQuery: String): LiveData<List<Task>> {
-        return repository.searchDatabase(searchQuery)
-    }
-
-}*/
 
 class TaskViewModel(application: Application) : AndroidViewModel(application){
     private val taskDao = TaskDatabase.getDatabase(application).taskDao()
     private val repository : TaskRepo
-    val getAllTasks: LiveData<List<Task>>
+    val getAllTasks: Flow<List<Task>>
     init {
         repository = TaskRepo(taskDao)
         getAllTasks = repository.getAllTasks()
+        Log.v("wiiiw",getAllTasks.toString())
     }
 
     fun insert(task : Task){
@@ -73,3 +48,4 @@ class TaskViewModel(application: Application) : AndroidViewModel(application){
 
 
 }
+

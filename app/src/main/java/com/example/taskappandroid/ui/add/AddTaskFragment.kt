@@ -2,6 +2,7 @@ package com.example.taskappandroid.ui.add
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,11 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.android.kotlinmvvmtodolist.R
-import com.android.kotlinmvvmtodolist.databinding.FragmentAddTaskBinding
+
 import com.example.taskappandroid.database.Task
 import com.example.taskappandroid.viewmodel.TaskViewModel
+import com.exemple.taskappandroid.R
+import com.exemple.taskappandroid.databinding.FragmentAddTaskBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -46,14 +48,14 @@ class AddTaskFragment : Fragment() {
                 val titleTitle = txtTask.text.toString()
                 val priority = spinner.selectedItemPosition
 
-                val taskEntry = Task(
+                val task = Task(
                     0,
                     titleTitle,
                     priority,
                     System.currentTimeMillis()
                 )
-
-                viewModel.insert(taskEntry)
+                Log.v("add",task.toString())
+                viewModel.insert(task)
                 Toast.makeText(requireContext(), "Ajout réussi!", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_addTaskFragment_to_taskFragment)
             }

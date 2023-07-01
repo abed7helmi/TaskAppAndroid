@@ -2,7 +2,8 @@ package com.example.taskappandroid.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.android.kotlinmvvmtodolist.R
+import com.exemple.taskappandroid.R
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

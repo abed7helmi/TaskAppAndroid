@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import java.security.AccessControlContext
 
 
-@Database(entities = arrayOf(Task::class), version = 1, exportSchema = false)
+@Database(entities = [Task::class], version = 1, exportSchema = false)
 abstract class TaskDatabase: RoomDatabase() {
     abstract fun taskDao(): TaskDao
 
@@ -32,3 +32,7 @@ abstract class TaskDatabase: RoomDatabase() {
 
     }
 }
+/*@Database(entities = [Task::class], version = 1, exportSchema = false)
+abstract class TaskDatabase: RoomDatabase() {
+    abstract fun taskDao(): TaskDao
+}*/

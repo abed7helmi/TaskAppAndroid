@@ -24,11 +24,36 @@ interface TaskDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM task_table ORDER BY timestamp DESC")
-    fun getAllTasks(): LiveData<List<Task>>
+    fun getAllTasks(): Flow<List<Task>>
 
     @Query("SELECT * FROM task_table ORDER BY priority ASC")
-    fun getAllPriorityTasks(): LiveData<List<Task>>
+    fun getAllPriorityTasks(): Flow<List<Task>>
+    //fun getAllPriorityTasks(): LiveData<List<Task>>
+
+    /*@Query("SELECT * FROM task_table WHERE title LIKE :searchQuery ORDER BY timestamp DESC")
+    fun searchDatabase(searchQuery: String): LiveData<List<Task>>*/
+}
+/*@Dao
+interface TaskDao {
+
+    @Insert
+    suspend fun insert(taskEntry: Task)
+
+    @Delete
+    suspend fun delete(taskEntry: Task)
+
+    @Update
+    suspend fun update(taskEntry: Task)
+
+    @Query("DELETE FROM task_table")
+    suspend fun deleteAll()
+
+    @Query("SELECT * FROM task_table ORDER BY timestamp DESC")
+    fun getAllTasks(): Flow<List<Task>>
+
+    @Query("SELECT * FROM task_table ORDER BY priority ASC")
+    fun getAllPriorityTasks(): Flow<List<Task>>
 
     @Query("SELECT * FROM task_table WHERE title LIKE :searchQuery ORDER BY timestamp DESC")
     fun searchDatabase(searchQuery: String): LiveData<List<Task>>
-}
+}*/

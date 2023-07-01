@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import java.text.DateFormat
 
-@SuppressLint("SetTextI18n")
+
 @BindingAdapter("setPriority")
 fun setPriority(view: TextView, priority: Int){
     when(priority){
